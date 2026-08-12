@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Cross-border Operations Lab - public data dashboard and transparent scenario simulator." />
+    <title>Cross-Border Operations Lab</title>
+    <style>
+      :root {
+        --navy:#102a43; --blue:#177eae; --sky:#eaf5fb; --ink:#1d2a38;
+        --muted:#617384; --line:#d9e2ec; --card:#ffffff; --canvas:#f6f9fc;
+        --positive:#138a5b; --warning:#b7791f; --danger:#c53030;
+      }
+      * { box-sizing:border-box; }
+      body { margin:0; background:var(--canvas); color:var(--ink); font-family:Inter,Segoe UI,Arial,"Microsoft YaHei",sans-serif; line-height:1.5; }
+      header { background:linear-gradient(118deg,var(--navy),#164e70); color:#fff; padding:56px max(24px,calc((100vw - 1120px)/2)); }
+      header p { max-width:760px; margin:13px 0 0; color:#dceff8; font-size:1.05rem; }
+      h1 { margin:0; font-size:clamp(2rem,4vw,3.1rem); letter-spacing:-.04em; }
+      h2 { color:var(--navy); margin:0 0 8px; font-size:1.45rem; }
+      h3 { margin:0 0 6px; color:var(--navy); font-size:1rem; }
+      main { max-width:1120px; padding:34px 24px 64px; margin:auto; }
+      .notice { background:#fff8e1; border-left:4px solid #d69e2e; padding:14px 16px; border-radius:8px; color:#654b13; margin-bottom:28px; }
+      .section-head { display:flex; justify-content:space-between; align-items:end; gap:16px; margin:28px 0 14px; }
+      .section-head p { margin:0; color:var(--muted); max-width:760px; }
+      .grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; }
+      .grid.three { grid-template-columns:repeat(3,minmax(0,1fr)); }
+      .grid.two { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px; box-shadow:0 4px 12px rgba(16,42,67,.04); }
+      .metric-label { color:var(--muted); font-size:.83rem; }
+      .metric { margin-top:5px; color:var(--navy); font-size:1.55rem; font-weight:750; letter-spacing:-.03em; }
+      .submetric { color:var(--muted); font-size:.82rem; margin-top:4px; }
+      .panel { background:#fff; border:1px solid var(--line); border-radius:14px; padding:20px; margin-top:14px; }
+      .chart { min-height:280px; display:flex; align-items:end; gap:5px; border-bottom:1px solid var(--line); padding:16px 2px 0; overflow:hidden; }
+      .bar-wrap { flex:1; height:236px; min-width:10px; display:flex; align-items:end; }
+      .bar { width:100%; min-height:2px; background:linear-gradient(180deg,#2fa5d5,var(--blue)); border-radius:4px 4px 0 0; }
+      .bar:hover { background:#0e5b84; }
+      .legend { display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; color:var(--muted); font-size:.82rem; }
+      .dot { width:9px; height:9px; border-radius:50%; display:inline-block; background:var(--blue); margin-right:4px; }
+      table { width:100%; border-collapse:collapse; font-size:.91rem; }
+      th,td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--line); }
+      th { color:var(--muted); font-weight:650; font-size:.78rem; text-transform:uppercase; letter-spacing:.04em; }
+      td.num { text-align:right; font-variant-numeric:tabular-nums; }
+      .controls { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+      label { font-size:.9rem; font-weight:650; color:var(--navy); display:block; }
+      input[type=range] { width:100%; accent-color:var(--blue); margin-top:7px; }
+      .control-value { float:right; color:var(--blue); font-variant-numeric:tabular-nums; }
+      select { width:100%; padding:10px; border:1px solid var(--line); border-radius:8px; background:#fff; font-size:1rem; color:var(--ink); }
+      .pressure { border-left:5px solid var(--positive); padding:12px 15px; background:#f0fff6; border-radius:8px; color:#155b3a; }
+      .pressure.medium { border-color:#d69e2e; background:#fffbeb; color:#805c12; }
+      .pressure.high { border-color:var(--danger); background:#fff5f5; color:#8b2424; }
+      button { border:0; background:var(--blue); color:#fff; border-radius:8px; padding:11px 14px; font-weight:700; cursor:pointer; }
+      button:hover { background:#0f6690; }
+      details { background:#edf7fb; border:1px solid #cfe8f3; border-radius:10px; padding:14px 16px; margin-top:18px; color:#25465d; }
+      summary { font-weight:700; cursor:pointer; }
+      footer { padding:28px 24px; text-align:center; color:var(--muted); font-size:.85rem; }
+      @media (max-width:800px) { .grid,.grid.three,.grid.two,.controls { grid-template-columns:1fr 1fr; } .section-head { display:block; } }
+      @media (max-width:520px) { .grid,.grid.three,.grid.two,.controls { grid-template-columns:1fr; } main { padding:26px 16px 48px; } header { padding:42px 20px; } .panel { overflow-x:auto; } }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Cross-Border Operations Lab</h1>
+      <p>Public-data operating dashboard + transparent four-factor scenario simulator. A portfolio project for business analytics, fintech, data operations and cross-border commerce roles.</p>
+    </header>
+    <main>
+      <div class="notice"><strong>Integrity note.</strong> The historical dashboard uses an anonymous public UCI dataset. The scenario simulator uses clearly labelled illustrative assumptions. Neither represents an employer, client, or real company's operating data.</div>
+
+      <div class="section-head">
+        <div><h2>1. Historical operating view</h2><p>Derived from cleaned public transaction records. Only aggregate metrics are included in this repository.</p></div>
+        <span id="sourceStatus" class="metric-label">Loading public-data aggregates…</span>
+      </div>
+      <div class="grid" id="overviewCards"></div>
+      <div class="grid two">
+        <section class="panel"><h3>Monthly recorded revenue</h3><div class="chart" id="monthlyChart"></div><div class="legend" id="monthlyLegend"></div></section>
+        <section class="panel"><h3>Customer segment mix</h3><div id="segmentsTable"></div></section>
+      </div>
+      <section class="panel"><div class="section-head" style="margin-top:0"><div><h3>Largest recorded markets</h3><p class="metric-label">Select a market for its aggregate indicators.</p></div><div style="min-width:220px"><select id="countrySelect" aria-label="Select country"></select></div></div><div class="grid three" id="countryCards"></div></section>
+
+      <div class="section-head">
+        <div><h2>2. Four-factor scenario simulator</h2><p>Stress-test a simplified operating plan. Controls affect a standalone scenario and are not inferred from the historical data.</p></div>
+      </div>
+      <section class="panel">
+        <div class="controls">
+          <div><label for="marketSelect">Illustrative market profile</label><select id="marketSelect"><option value="US">United States (USD)</option><option value="UK">United Kingdom (GBP)</option><option value="EU">Euro area (EUR)</option></select></div>
+          <div><label>Price elasticity <span class="control-value" id="elasticityText">1.4</span></label><p class="metric-label">Fixed, visible illustrative assumption for each market profile.</p></div>
+          <div><label for="fx">FX change <span class="control-value" id="fxValue">0%</span></label><input id="fx" type="range" min="-20" max="20" value="0" step="1" /></div>
+          <div><label for="logistics">Logistics cost change <span class="control-value" id="logisticsValue">0%</span></label><input id="logistics" type="range" min="-30" max="50" value="0" step="1" /></div>
+          <div><label for="price">Local price change <span class="control-value" id="priceValue">0%</span></label><input id="price" type="range" min="-30" max="30" value="0" step="1" /></div>
+          <div><label for="cogs">Product cost change <span class="control-value" id="cogsValue">0%</span></label><input id="cogs" type="range" min="-20" max="40" value="0" step="1" /></div>
+        </div>
+      </section>
+      <div class="grid" id="scenarioCards" style="margin-top:14px"></div>
+      <section class="panel"><div id="pressureBox" class="pressure"></div><div class="grid two" style="margin-top:16px"><div><h3>Contribution-profit driver view</h3><div id="driverTable"></div></div><div><h3>Scenario export</h3><p class="metric-label">Download the exact inputs and results from the simulator.</p><button id="downloadButton">Download scenario CSV</button></div></div></section>
+      <details><summary>Calculation boundary and formulas</summary><p>Orders = baseline orders × (1 − price elasticity × price change). Revenue = orders × local unit price × FX. Contribution profit = revenue − product cost − logistics cost − platform fee. Fixed costs, tax, marketing spend, financing cost and contractual hedging are excluded.</p></details>
+    </main>
+    <footer>Built for portfolio demonstration. Historical data: UCI Online Retail. Scenario values: illustrative and user-adjustable.</footer>
+    <script src="data/processed/operations_summary.js"></script>
+    <script>
+      const fallback = { metadata:{source_name:"Demo aggregates unavailable"}, overview:{raw_rows:0,clean_rows:0,excluded_rows:0,date_start:"-",date_end:"-",customers:0,orders:0,revenue:0}, monthly:[],countries:[],segments:[] };
+      const ops = window.OPERATIONS_DATA || fallback;
+      const fmt = new Intl.NumberFormat("en-US", { maximumFractionDigits:0 });
+      const money = value => new Intl.NumberFormat("en-GB", {style:"currency",currency:"GBP",maximumFractionDigits:0}).format(value);
+      const percent = value => `${(value * 100).toFixed(1)}%`;
+      const profiles = {
+        US:{name:"United States",currency:"USD",orders:12000,price:45,fx:7.2,cogs:110,logistics:52,fee:.15,elasticity:1.4},
+        UK:{name:"United Kingdom",currency:"GBP",orders:10000,price:38,fx:9.2,cogs:100,logistics:55,fee:.15,elasticity:1.6},
+        EU:{name:"Euro area",currency:"EUR",orders:11000,price:42,fx:7.8,cogs:105,logistics:50,fee:.15,elasticity:1.5}
+      };
+      const card = (label,value,detail="") => `<article class="card"><div class="metric-label">${label}</div><div class="metric">${value}</div>${detail ? `<div class="submetric">${detail}</div>` : ""}</article>`;
+      function renderOps(){
+        document.getElementById("sourceStatus").textContent = `${ops.metadata.source_name || "Public data"} · refreshed ${ops.metadata.downloaded_at_utc ? ops.metadata.downloaded_at_utc.slice(0,10) : "with repository"}`;
+        document.getElementById("overviewCards").innerHTML = [
+          card("Clean transactions",fmt.format(ops.overview.clean_rows),`${fmt.format(ops.overview.excluded_rows)} excluded by explicit rules`),
+          card("Tracked orders",fmt.format(ops.overview.orders),`${ops.overview.date_start} to ${ops.overview.date_end}`),
+          card("Identified customers",fmt.format(ops.overview.customers),"Anonymous source IDs only"),
+          card("Recorded revenue",money(ops.overview.revenue),"Source-dataset monetary units")
+        ].join("");
+        const max = Math.max(...ops.monthly.map(x=>x.revenue),1);
+        document.getElementById("monthlyChart").innerHTML = ops.monthly.map((x,i)=>`<div class="bar-wrap"><div class="bar" style="height:${Math.max(2,x.revenue/max*100)}%" title="${x.month}: ${money(x.revenue)}"></div></div>`).join("");
+        document.getElementById("monthlyLegend").innerHTML = ops.monthly.filter((_,i)=>i%4===0).map(x=>`<span><i class="dot"></i>${x.month}</span>`).join("");
+        document.getElementById("segmentsTable").innerHTML = `<table><thead><tr><th>Segment</th><th class="num">Customers</th><th class="num">Revenue</th></tr></thead><tbody>${ops.segments.map(x=>`<tr><td>${x.segment}</td><td class="num">${fmt.format(x.customers)}</td><td class="num">${money(x.revenue)}</td></tr>`).join("")}</tbody></table>`;
+        const select=document.getElementById("countrySelect"); select.innerHTML=ops.countries.map((x,i)=>`<option value="${i}">${x.country}</option>`).join(""); select.addEventListener("change",renderCountry); renderCountry();
+      }
+      function renderCountry(){ const x=ops.countries[Number(document.getElementById("countrySelect").value)]||{}; document.getElementById("countryCards").innerHTML=[card("Recorded revenue",money(x.revenue||0)),card("Orders",fmt.format(x.orders||0)),card("Revenue share",percent(x.share_of_revenue||0),`${fmt.format(x.customers||0)} customers`)].join(""); }
+      function scenario(){
+        const p=profiles[document.getElementById("marketSelect").value];
+        const get=id=>Number(document.getElementById(id).value)/100;
+        const fx=get("fx"), logistics=get("logistics"), price=get("price"), cogs=get("cogs");
+        [["fx",fx],["logistics",logistics],["price",price],["cogs",cogs]].forEach(([id,val])=>document.getElementById(`${id}Value`).textContent=`${val>0?"+":""}${(val*100).toFixed(0)}%`);
+        document.getElementById("elasticityText").textContent=p.elasticity.toFixed(1);
+        const baselineOrders=p.orders, baselineRevenue=baselineOrders*p.price*p.fx, baselineProfit=baselineRevenue-(baselineOrders*p.cogs)-(baselineOrders*p.logistics)-(baselineRevenue*p.fee);
+        const orders=Math.max(0,p.orders*(1-p.elasticity*price)); const revenue=orders*p.price*(1+price)*p.fx*(1+fx); const variableCost=orders*p.cogs*(1+cogs)+orders*p.logistics*(1+logistics)+revenue*p.fee; const profit=revenue-variableCost; const margin=revenue?profit/revenue:0; const profitChange=profit-baselineProfit;
+        document.getElementById("scenarioCards").innerHTML=[card("Revenue (CNY)",`¥${fmt.format(revenue)}`,`Δ ¥${fmt.format(revenue-baselineRevenue)}`),card("Contribution profit",`¥${fmt.format(profit)}`,`Δ ¥${fmt.format(profitChange)}`),card("Contribution margin",percent(margin),`baseline ${percent(baselineProfit/baselineRevenue)}`),card("Estimated orders",fmt.format(orders),`Δ ${fmt.format(orders-baselineOrders)}`)].join("");
+        let level="Low", reason="Scenario remains within the project's illustrative thresholds.", cls=""; if(profit<=0||margin<.10||profitChange/baselineProfit<=-.30){level="High";reason="Contribution profit or margin is materially pressured in this scenario.";cls="high"}else if(margin<.18||profitChange/baselineProfit<=-.15){level="Medium";reason="Profit space has narrowed; review price, logistics and FX assumptions.";cls="medium"}
+        document.getElementById("pressureBox").className=`pressure ${cls}`;document.getElementById("pressureBox").innerHTML=`<strong>${level} operating pressure</strong><br>${reason}`;
+        const factors=[["FX",fx],["Logistics",logistics],["Price",price],["Product cost",cogs]]; const impacts=factors.map(([name,val])=>{let fx1=0,l1=0,p1=0,c1=0;if(name==="FX")fx1=val;if(name==="Logistics")l1=val;if(name==="Price")p1=val;if(name==="Product cost")c1=val;const o=Math.max(0,p.orders*(1-p.elasticity*p1));const r=o*p.price*(1+p1)*p.fx*(1+fx1);const cp=r-(o*p.cogs*(1+c1))-(o*p.logistics*(1+l1))-(r*p.fee);return {name,impact:cp-baselineProfit}});
+        document.getElementById("driverTable").innerHTML=`<table><thead><tr><th>Single factor</th><th class="num">Profit impact (CNY)</th></tr></thead><tbody>${impacts.map(x=>`<tr><td>${x.name}</td><td class="num" style="color:${x.impact<0?'#c53030':'#138a5b'}">¥${fmt.format(x.impact)}</td></tr>`).join("")}</tbody></table>`;
+        document.getElementById("downloadButton").onclick=()=>{const rows=[["market","fx_change","logistics_change","price_change","cogs_change","orders","revenue_cny","contribution_profit","contribution_margin","pressure_level"],[p.name,fx,logistics,price,cogs,orders,revenue,profit,margin,level]];const csv=rows.map(row=>row.map(v=>`"${v}"`).join(",")).join("\n");const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));a.download="cross_border_scenario.csv";a.click();URL.revokeObjectURL(a.href)};
+      }
+      ["marketSelect","fx","logistics","price","cogs"].forEach(id=>document.getElementById(id).addEventListener("input",scenario));
+      renderOps(); scenario();
+    </script>
+  </body>
+</html>

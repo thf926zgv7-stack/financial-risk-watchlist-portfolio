@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>周子钧｜公开数据作品集</title>
+  <style>
+    :root { --ink:#12233f; --blue:#1c5fbe; --paper:#f4f7fb; --line:#dce5f1; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:"Microsoft YaHei",system-ui,sans-serif; background:var(--paper); color:var(--ink); }
+    main { max-width:920px; margin:0 auto; padding:72px 24px; }
+    .eyebrow { color:var(--blue); font-weight:700; letter-spacing:.08em; font-size:13px; }
+    h1 { font-size:clamp(32px,5vw,52px); margin:12px 0; }
+    .intro { max-width:720px; color:#53657c; font-size:17px; line-height:1.75; }
+    .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin-top:36px; }
+    a.card { display:block; text-decoration:none; color:inherit; background:#fff; border:1px solid var(--line); border-radius:16px; padding:24px; transition:transform .15s,box-shadow .15s; }
+    a.card:hover { transform:translateY(-3px); box-shadow:0 10px 24px #16386518; }
+    h2 { margin:0 0 10px; font-size:22px; } p { line-height:1.65; color:#53657c; }
+    .go { color:var(--blue); font-weight:700; margin-top:16px; }
+    footer { margin-top:38px; color:#708096; font-size:13px; }
+    @media (max-width:680px) { .grid { grid-template-columns:1fr; } main { padding-top:46px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="eyebrow">PUBLIC-DATA INTERACTIVE PORTFOLIO</div>
+    <h1>周子钧｜交互式分析作品</h1>
+    <p class="intro">所有项目均使用公开数据或明确标注的示例假设，重点展示数据处理、分析口径、可复现逻辑与交互式结果呈现。</p>
+    <section class="grid">
+      <a class="card" href="cross-border-operations-lab/">
+        <h2>跨境经营冲击推演器</h2>
+        <p>基于匿名公开零售交易数据构建经营看板，并通过汇率、物流、定价、成本四个参数进行敏感性推演和 CSV 导出。</p>
+        <div class="go">打开交互应用 →</div>
+      </a>
+      <a class="card" href="macro-event-shock-map/">
+        <h2>宏观事件—资产冲击地图</h2>
+        <p>基于 FRED 公开市场数据，对重大事件前后五个交易日内股票、原油、VIX 与长端利率的变化进行可复核分析。</p>
+        <div class="go">打开交互应用 →</div>
+      </a>
+    </section>
+    <footer>GitHub 仓库保留项目源码、README、数据处理脚本和可复现结果；本页直接展示交互成果。</footer>
+  </main>
+</body>
+</html>
