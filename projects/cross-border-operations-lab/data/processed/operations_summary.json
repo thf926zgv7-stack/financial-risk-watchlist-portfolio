@@ -1,0 +1,220 @@
+{
+  "metadata": {
+    "source_name": "UCI Online Retail",
+    "source_url": "https://archive.ics.uci.edu/dataset/352/online+retail",
+    "downloaded_at_utc": "2026-08-12T12:53:38+00:00",
+    "currency_note": "Recorded values are source-dataset monetary units and are not converted to CNY.",
+    "cleaning_rules": "Excluded cancellation invoices, missing CustomerID, invalid dates and non-positive quantity or price."
+  },
+  "overview": {
+    "raw_rows": 541909,
+    "clean_rows": 397884,
+    "excluded_rows": 144025,
+    "date_start": "2010-12-01",
+    "date_end": "2011-12-09",
+    "customers": 4338,
+    "orders": 18532,
+    "revenue": 8911407.9
+  },
+  "monthly": [
+    {
+      "month": "2010-12",
+      "revenue": 572713.89,
+      "orders": 1400,
+      "customers": 885,
+      "average_order_value": 409.08
+    },
+    {
+      "month": "2011-01",
+      "revenue": 569445.04,
+      "orders": 987,
+      "customers": 741,
+      "average_order_value": 576.95
+    },
+    {
+      "month": "2011-02",
+      "revenue": 447137.35,
+      "orders": 997,
+      "customers": 758,
+      "average_order_value": 448.48
+    },
+    {
+      "month": "2011-03",
+      "revenue": 595500.76,
+      "orders": 1321,
+      "customers": 974,
+      "average_order_value": 450.8
+    },
+    {
+      "month": "2011-04",
+      "revenue": 469200.36,
+      "orders": 1149,
+      "customers": 856,
+      "average_order_value": 408.36
+    },
+    {
+      "month": "2011-05",
+      "revenue": 678594.56,
+      "orders": 1555,
+      "customers": 1056,
+      "average_order_value": 436.4
+    },
+    {
+      "month": "2011-06",
+      "revenue": 661213.69,
+      "orders": 1393,
+      "customers": 991,
+      "average_order_value": 474.67
+    },
+    {
+      "month": "2011-07",
+      "revenue": 600091.01,
+      "orders": 1331,
+      "customers": 949,
+      "average_order_value": 450.86
+    },
+    {
+      "month": "2011-08",
+      "revenue": 645343.9,
+      "orders": 1280,
+      "customers": 935,
+      "average_order_value": 504.17
+    },
+    {
+      "month": "2011-09",
+      "revenue": 952838.38,
+      "orders": 1755,
+      "customers": 1266,
+      "average_order_value": 542.93
+    },
+    {
+      "month": "2011-10",
+      "revenue": 1039318.79,
+      "orders": 1929,
+      "customers": 1364,
+      "average_order_value": 538.79
+    },
+    {
+      "month": "2011-11",
+      "revenue": 1161817.38,
+      "orders": 2657,
+      "customers": 1664,
+      "average_order_value": 437.27
+    },
+    {
+      "month": "2011-12",
+      "revenue": 518192.79,
+      "orders": 778,
+      "customers": 615,
+      "average_order_value": 666.06
+    }
+  ],
+  "countries": [
+    {
+      "country": "United Kingdom",
+      "revenue": 7308391.55,
+      "orders": 16646,
+      "customers": 3920,
+      "share_of_revenue": 0.820116
+    },
+    {
+      "country": "Netherlands",
+      "revenue": 285446.34,
+      "orders": 94,
+      "customers": 9,
+      "share_of_revenue": 0.032032
+    },
+    {
+      "country": "EIRE",
+      "revenue": 265545.9,
+      "orders": 260,
+      "customers": 3,
+      "share_of_revenue": 0.029798
+    },
+    {
+      "country": "Germany",
+      "revenue": 228867.14,
+      "orders": 457,
+      "customers": 94,
+      "share_of_revenue": 0.025682
+    },
+    {
+      "country": "France",
+      "revenue": 209024.05,
+      "orders": 389,
+      "customers": 87,
+      "share_of_revenue": 0.023456
+    },
+    {
+      "country": "Australia",
+      "revenue": 138521.31,
+      "orders": 57,
+      "customers": 9,
+      "share_of_revenue": 0.015544
+    },
+    {
+      "country": "Spain",
+      "revenue": 61577.11,
+      "orders": 90,
+      "customers": 30,
+      "share_of_revenue": 0.00691
+    },
+    {
+      "country": "Switzerland",
+      "revenue": 56443.95,
+      "orders": 51,
+      "customers": 21,
+      "share_of_revenue": 0.006334
+    },
+    {
+      "country": "Belgium",
+      "revenue": 41196.34,
+      "orders": 98,
+      "customers": 25,
+      "share_of_revenue": 0.004623
+    },
+    {
+      "country": "Sweden",
+      "revenue": 38378.33,
+      "orders": 36,
+      "customers": 8,
+      "share_of_revenue": 0.004307
+    },
+    {
+      "country": "Japan",
+      "revenue": 37416.37,
+      "orders": 19,
+      "customers": 8,
+      "share_of_revenue": 0.004199
+    },
+    {
+      "country": "Norway",
+      "revenue": 36165.44,
+      "orders": 36,
+      "customers": 10,
+      "share_of_revenue": 0.004058
+    }
+  ],
+  "segments": [
+    {
+      "segment": "High-value active",
+      "customers": 1314,
+      "revenue": 6494962.5
+    },
+    {
+      "segment": "Repeat purchaser",
+      "customers": 674,
+      "revenue": 876029.14
+    },
+    {
+      "segment": "Developing",
+      "customers": 1265,
+      "revenue": 833095.32
+    },
+    {
+      "segment": "At-risk",
+      "customers": 1085,
+      "revenue": 707320.94
+    }
+  ]
+}

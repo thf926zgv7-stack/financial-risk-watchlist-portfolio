@@ -1,5 +1,22 @@
 # Corporate Financial Health Watchlist
 
+## Portfolio extensions | 作品集扩展
+
+This repository also contains two complete, independently runnable public-data
+applications under [`projects/`](projects/). They are intentionally kept with
+this original SEC project while standalone GitHub repositories are being set
+up, so the work can be reviewed immediately in one public portfolio.
+
+| Project | What it solves | Public data / boundary |
+|---|---|---|
+| [Cross-Border Operations Lab](projects/cross-border-operations-lab/README.md) | A business dashboard plus a four-factor FX, logistics, pricing and COGS simulator. | UCI Online Retail aggregates; simulator assumptions are clearly illustrative. |
+| [Macro Event Shock Map](projects/macro-event-shock-map/README.md) | A ±5-trading-day event study across equities, oil, VIX and Treasury yields. | FRED market series; descriptive association only, not a causal claim or investment advice. |
+
+Each extension includes its own README, source data-building script, processed
+snapshot, tests and a zero-dependency interactive `index.html` page. No
+personal data, employer material, internal data or identification documents are
+included.
+
 > A portfolio project that turns public SEC XBRL filing data into a transparent, rule-based financial-health watchlist.  
 > 作品集项目：基于公开 SEC 财务报表数据，对企业财务健康度进行可解释的初筛与排序。
 
@@ -56,4 +73,3 @@ Python, Pandas, NumPy, SQLite, public API ingestion, data-quality filtering, int
 - The current sample is intentionally small and limited to non-financial U.S. listed companies.
 - Missing or non-standard XBRL facts are excluded rather than imputed blindly.
 - A next version could add a documented peer-selection policy, multi-year trend review, and a Streamlit interface.
-
